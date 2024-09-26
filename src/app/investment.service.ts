@@ -5,14 +5,14 @@ import { signal } from "@angular/core";
   providedIn: 'root'
 })
 export class InvestmentService {
-  resultsData?: {
+  resultsData = signal<{
     year: number,
     interest: number,
     valueEndOfYear: number,
     annualInvestment: number,
     totalInterest: number,
     totalAmountInvested: number,
-  }[] | undefined;
+  }[] | undefined>(undefined);
 
   calculateInvestmentResults(data: InvestmentInput) {
     const { initialInvestment, annualInvestment, expectedReturn, duration } = data;
@@ -35,6 +35,6 @@ export class InvestmentService {
       });
     }
     //this.resultsData.set(annualData);
-    this.resultsData = annualData;
+    this.resultsData.set(annualData);
   }
 }
